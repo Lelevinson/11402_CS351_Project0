@@ -2,17 +2,14 @@
 
 Given an array of integers, find two numbers that add up to a target sum and return their indices.
 
-# Planning Branch README
+# Requirements
 
-This branch will be our planning branch. We will design a structured workflow on how we will tackle the Two Sum problem.
-
-# Writing Convention
-
-We will use **camelCase** format for variables, and **PascalCase** format for functions.
-
-# Structured Sprint
-
-1. After setting up this project's repo, we will put up the task in Jira, and copy the ticket.
-2. Then, we will start writting the main code in `main.cpp`
-3. We will ask copilot to adjust our code's logic again, and set up some testing.
-4. DONE.
+- **Language**: C++ 20 with STL Vector
+  - Use modern C++ standards and features
+  - Leverage STL containers for efficient data management
+- **Implementations**: - `TwoSumArray`: Brute force approach using nested loops - Time complexity: O(n²) - Space complexity: O(1) - Suitable for small datasets - `TwoSumHashTable`: Hash table approach for O(n) time complexity - Time complexity: O(n) - Space complexity: O(n) - Optimal for larger datasets
+- **Test Cases**: Comprehensive unit tests covering: - Valid pairs with positive/negative integers - Edge cases (empty array, single element, duplicate values) - Multiple valid pairs in single array - No valid pair exists scenario - Target sum equals zero - All tests must pass before merging
+- **CI/CD**: Automated testing via GitHub Actions on push and pull requests
+  - Run full test suite automatically
+  - Prevent merge if tests fail
+  - Generate test coverage reports
