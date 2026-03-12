@@ -15,4 +15,4 @@ We will use **camelCase** format for variables, and **PascalCase** format for fu
 1. After setting up this project's repo, we will put up the task in Jira, and copy the ticket.
 2. Then, we will start writting the main code in `main.cpp`
 3. We will ask copilot to adjust our code's logic again, and set up some testing.
-4. DONE
+4. DONE.
