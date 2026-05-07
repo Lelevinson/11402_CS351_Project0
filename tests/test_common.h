@@ -6,6 +6,7 @@
 #include <climits>
 
 using std::cout;
+using std::endl;
 using std::vector;
 
 // ============================================================================
@@ -19,6 +20,10 @@ extern int testsFailed;
 // ============================================================================
 //                          TEST UTILITIES
 // ============================================================================
+
+// Implementations under test, defined in src/twosum.cpp and linked once.
+vector<int> twoSumArray(const vector<int>& nums, int target);
+vector<int> twoSumHashTable(const vector<int>& nums, int target);
 
 /**
  * Assert that two vectors are equal (handles both orderings for this problem)

@@ -1,5 +1,4 @@
 #include "test_common.h"
-#include "../src/twosum.cpp"
 
 // ============================================================================
 //              TESTS FOR TWOSUM ARRAY (Brute Force) - NORMAL CASES
@@ -39,14 +38,14 @@ void testTwoSumArrayNormalCases() {
     // Test 5: Solution at beginning
     assertVectorsEqual(
         twoSumArray({10, 20, 8, 9}, 18),
-        {0, 3},
+        {0, 2},
         "Normal: [10,20,8,9] target=18"
     );
     
     // Test 6: Larger array
     assertVectorsEqual(
         twoSumArray({1, 3, 5, 7, 9, 11, 13, 15}, 18),
-        {3, 5},
+        {1, 7},
         "Normal: [1,3,5,7,9,11,13,15] target=18"
     );
 }
@@ -111,7 +110,7 @@ void testTwoSumArrayDuplicates() {
     // Test 13: Multiple pairs of duplicates
     assertVectorsEqual(
         twoSumArray({1, 1, 2, 2, 3, 3}, 4),
-        {0, 3},
+        {0, 4},
         "Duplicate: [1,1,2,2,3,3] target=4"
     );
     
@@ -146,9 +145,9 @@ void testTwoSumArrayLargeNumbers() {
     
     // Test 17: Mix of very large numbers
     assertVectorsEqual(
-        twoSumArray({INT_MIN + 1, INT_MAX - 1, 100}, INT_MAX),
-        {0, 1},
-        "Large: [INT_MIN+1, INT_MAX-1, 100] target=INT_MAX"
+        twoSumArray({INT_MAX - 100, 50, 100}, INT_MAX),
+        {0, 2},
+        "Large: [INT_MAX-100,50,100] target=INT_MAX"
     );
 }
 
