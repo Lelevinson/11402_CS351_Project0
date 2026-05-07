@@ -1,0 +1,16 @@
+.git
+.github
+build
+
+*.o
+*.obj
+*.exe
+
+two_sum_program
+test_program
+twosum.o
+main.o
+
+.vscode
+.idea
+.DS_Store
