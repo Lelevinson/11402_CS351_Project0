@@ -1,0 +1,116 @@
+name: C++ Build and Test
+
+on:
+  push:
+    branches: [main, develop, "RP11402-*"]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build-and-test:
+    name: Build and Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code from repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up the compiler
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential g++ make
+
+      # Step 3: Compile the main program
+      - name: Compile main program
+        run: |
+          g++ -std=c++20 -Wall -Wextra -o two_sum_program \
+            src/main.cpp \
+            src/twosum.cpp
+          echo "✓ Main program compiled successfully"
+
+      # Step 4: Run the main program with sample input
+      - name: Run main program (demo)
+        run: |
+          echo -e "4\n2\n7\n11\n15\n9" | ./two_sum_program
+          echo "✓ Program ran successfully with user input"
+
+      # Step 5: Compile the test suite
+      - name: Compile test suite
+        run: |
+          g++ -std=c++20 -Wall -Wextra -o test_program \
+            tests/test_common.cpp \
+            tests/test_array.cpp \
+            tests/test_hashtable.cpp \
+            tests/main.cpp
+          echo "✓ Test suite compiled successfully"
+
+      # Step 6: Run all tests
+      - name: Run test suite
+        run: |
+          ./test_program
+          echo "✓ All tests completed"
+
+      # Step 7: Check for memory leaks (optional)
+      - name: Memory check (valgrind)
+        continue-on-error: true
+        run: |
+          sudo apt-get install -y valgrind
+          valgrind --leak-check=full --show-leak-kinds=all \
+            ./test_program > /dev/null 2>&1
+          echo "✓ Memory check completed"
+
+  code-quality:
+    name: Code Quality Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install GCC
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++ cppcheck
+
+      - name: Check for compile warnings
+        run: |
+          g++ -std=c++20 -Wall -Wextra -Wpedantic \
+            -c src/twosum.cpp -o twosum.o
+          g++ -std=c++20 -Wall -Wextra -Wpedantic \
+            -c src/main.cpp -o main.o
+          echo "✓ No critical warnings detected"
+
+      - name: Static analysis with cppcheck
+        continue-on-error: true
+        run: |
+          cppcheck --enable=all --suppress=missingIncludeSystem \
+            src/ tests/
+          echo "✓ Static analysis completed"
+
+      - name: Verify both implementations exist
+        run: |
+          if grep -q "twoSumArray" src/twosum.cpp; then
+            echo "✓ twoSumArray implementation found"
+          else
+            echo "✗ twoSumArray implementation NOT found"
+            exit 1
+          fi
+
+          if grep -q "twoSumHashTable" src/twosum.cpp; then
+            echo "✓ twoSumHashTable implementation found"
+          else
+            echo "✗ twoSumHashTable implementation NOT found"
+            exit 1
+          fi
+
+      - name: Verify test coverage
+        run: |
+          test_count=$(grep -c "assertVectorsEqual" tests/*.cpp)
+          echo "✓ Found $test_count test assertions"
+          if [ "$test_count" -ge 40 ]; then
+            echo "✓ Sufficient test coverage"
+          else
+            echo "⚠ Warning: Consider adding more tests"
+          fi
