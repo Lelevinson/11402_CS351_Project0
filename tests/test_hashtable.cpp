@@ -38,7 +38,7 @@ void testTwoSumHashTableNormalCases() {
     // Test 29: Solution at beginning
     assertVectorsEqual(
         twoSumHashTable({10, 20, 8, 9}, 18),
-        {0, 3},
+        {0, 2},
         "Normal: [10,20,8,9] target=18"
     );
     
@@ -110,7 +110,7 @@ void testTwoSumHashTableDuplicates() {
     // Test 37: Multiple pairs of duplicates
     assertVectorsEqual(
         twoSumHashTable({1, 1, 2, 2, 3, 3}, 4),
-        {0, 3},
+        {2, 3},
         "Duplicate: [1,1,2,2,3,3] target=4"
     );
     
@@ -145,9 +145,9 @@ void testTwoSumHashTableLargeNumbers() {
     
     // Test 41: Mix of very large numbers
     assertVectorsEqual(
-        twoSumHashTable({INT_MIN + 1, INT_MAX - 1, 100}, INT_MAX),
-        {0, 1},
-        "Large: [INT_MIN+1, INT_MAX-1, 100] target=INT_MAX"
+        twoSumHashTable({INT_MAX - 100, 50, 100}, INT_MAX),
+        {0, 2},
+        "Large: [INT_MAX-100,50,100] target=INT_MAX"
     );
 }
 
