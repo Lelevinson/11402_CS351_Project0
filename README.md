@@ -46,7 +46,19 @@ Given an array of integers, find two numbers that add up to a target sum and ret
 - **Coverage reporting**: Generate and upload test coverage metrics
 - **Artifact storage**: Archive test reports for review
 
-## 5. Deliverables
+## 5. CMake Build (Optional)
+- **Build system**: CMake for a standard cross-platform build setup
+- **Use case**: Build the demo app and the test executable from one project file
+- **Status**: Optional addition, does not replace the GitHub Actions workflow
+
+### Example commands
+```bash
+cmake -S . -B build
+cmake --build build
+ctest --test-dir build
+```
+
+## 6. Deliverables
 - Source code in `/src/` directory
 - Unit tests in `/tests/` directory
 - GitHub Actions workflow in `/.github/workflows/`
