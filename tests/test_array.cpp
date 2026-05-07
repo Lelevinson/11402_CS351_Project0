@@ -1,5 +1,4 @@
 #include "test_common.h"
-#include "../src/twosum.cpp"
 
 // ============================================================================
 //              TESTS FOR TWOSUM ARRAY (Brute Force) - NORMAL CASES

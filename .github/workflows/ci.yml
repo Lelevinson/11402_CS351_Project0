@@ -43,7 +43,8 @@ jobs:
             tests/test_common.cpp \
             tests/test_array.cpp \
             tests/test_hashtable.cpp \
-            tests/main.cpp
+            tests/main.cpp \
+            src/twosum.cpp
           echo "✓ Test suite compiled successfully"
 
       # Step 6: Run all tests
@@ -107,7 +108,7 @@ jobs:
 
       - name: Verify test coverage
         run: |
-          test_count=$(grep -c "assertVectorsEqual" tests/*.cpp)
+          test_count=$(grep -Rho "assertVectorsEqual" tests/*.cpp | wc -l)
           echo "✓ Found $test_count test assertions"
           if [ "$test_count" -ge 40 ]; then
             echo "✓ Sufficient test coverage"
